@@ -13,9 +13,10 @@ public class MainFrame extends JFrame {
     public MainFrame(String str) {
 
         setTitle(str);
-        setSize(500, 500);
+        setSize(1500, 1500);
         setLayout(new BorderLayout());
         setVisible(true);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         getContentPane().setBackground(Color.white);
 

@@ -9,7 +9,7 @@ public class SideBar extends JPanel implements MouseListener {
 
     public SideBar() {
         setBackground(Color.red);
-        setSize(50, 441);
+        setSize(50, 685);
         addMouseListener(this);
     }
 
@@ -27,22 +27,13 @@ public class SideBar extends JPanel implements MouseListener {
 
     @Override
     public void mouseEntered(MouseEvent e) {
-        int i = 0;
-        while (i < 200) {
-            setSize(i, 441);
-            System.out.println(i);
-            i++;
-        }
+        setSize(200, 685);
         System.out.println("Mouse Entered");
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
         System.out.println("Mouse exit");
-        int i = 441;
-        while (i > 50) {
-            setSize(i, 441);
-            i--;
-        }
+        setSize(50, 685);
     }
 }
