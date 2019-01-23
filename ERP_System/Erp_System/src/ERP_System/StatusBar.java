@@ -7,5 +7,6 @@ public class StatusBar extends JPanel {
 
     public StatusBar() {
         setBackground(Color.BLACK);
+        
     }
 }

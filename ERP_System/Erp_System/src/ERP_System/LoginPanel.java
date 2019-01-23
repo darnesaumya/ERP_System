@@ -41,7 +41,6 @@ public class LoginPanel extends JFrame implements ActionListener {
             if (rs.next()) {
                 flag = true;
                 mf = new MainFrame("hello");
-                System.out.println(flag);
                 setVisible(false);
             } else {
                 flag = false;

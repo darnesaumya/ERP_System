@@ -9,12 +9,12 @@ public class SideBar extends JPanel implements MouseListener {
 
     public SideBar() {
         setBackground(Color.red);
+        setSize(50, 441);
         addMouseListener(this);
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -25,15 +25,24 @@ public class SideBar extends JPanel implements MouseListener {
     public void mouseReleased(MouseEvent e) {
     }
 
-    @Override   
+    @Override
     public void mouseEntered(MouseEvent e) {
+        int i = 0;
+        while (i < 200) {
+            setSize(i, 441);
+            System.out.println(i);
+            i++;
+        }
         System.out.println("Mouse Entered");
-        setSize(100,500);
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
         System.out.println("Mouse exit");
-        setSize(10,500);
+        int i = 441;
+        while (i > 50) {
+            setSize(i, 441);
+            i--;
+        }
     }
 }
