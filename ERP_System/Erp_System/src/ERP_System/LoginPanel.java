@@ -46,7 +46,7 @@ public class LoginPanel extends JFrame implements ActionListener {
                 flag = false;
                 System.out.println("Login failed");
             }
-        } catch (Exception ec) {
+        } catch (ClassNotFoundException | SQLException ec) {
             System.out.println(ec);
         }
 
