@@ -6,7 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
 
-public class LoginPanel extends JFrame implements ActionListener {
+public class LoginFrame extends JFrame implements ActionListener {
 
     JTextField name, pass;
     JButton submit;
@@ -14,7 +14,7 @@ public class LoginPanel extends JFrame implements ActionListener {
     boolean flag;
     MainFrame mf;
 
-    public LoginPanel() {
+    public LoginFrame() {
         setLayout(new FlowLayout());
         setBackground(Color.WHITE);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -56,7 +56,7 @@ public class LoginPanel extends JFrame implements ActionListener {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new LoginPanel();
+                new LoginFrame();
             }
         });
     }

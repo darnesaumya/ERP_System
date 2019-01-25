@@ -24,7 +24,7 @@ public class MainFrame extends JFrame {
         tb = new TopBar();
         cp = new CenterPanel();
         stb = new StatusBar();
-        add(sb, BorderLayout.WEST);
+        add(sb, BorderLayout.LINE_START);
         add(tb, BorderLayout.NORTH);
         add(cp, BorderLayout.CENTER);
         add(stb, BorderLayout.SOUTH);
