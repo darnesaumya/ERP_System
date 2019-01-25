@@ -15,18 +15,20 @@ public class LoginFrame extends JFrame implements ActionListener {
     MainFrame mf;
 
     public LoginFrame() {
-        setLayout(new FlowLayout());
+        BoxLayout bl = new BoxLayout(getContentPane(), BoxLayout.Y_AXIS);
+        getContentPane().setLayout(bl);
         setBackground(Color.WHITE);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
-        setSize(500,500);
+        pack();
+        setSize(500, 500);
         name = new JTextField(10);
         pass = new JTextField(10);
         submit = new JButton("Submit");
         submit.addActionListener(this);
-        add(name);
-        add(pass);
-        add(submit);
+        add(name, CENTER_ALIGNMENT);
+        add(pass , CENTER_ALIGNMENT);
+        add(submit, CENTER_ALIGNMENT);
     }
 
     @Override
@@ -49,9 +51,8 @@ public class LoginFrame extends JFrame implements ActionListener {
         } catch (ClassNotFoundException | SQLException ec) {
             System.out.println(ec);
         }
-
     }
-   
+
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
