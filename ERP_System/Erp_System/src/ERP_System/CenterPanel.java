@@ -6,6 +6,6 @@ import java.awt.*;
 public class CenterPanel extends JPanel {
 
     public CenterPanel() {
-        setBackground(Color.GRAY);
+        setBackground(Color.decode("#e9e9e9"));
     }
 }

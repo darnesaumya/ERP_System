@@ -6,6 +6,6 @@ import java.awt.*;
 public class TopBar extends JPanel {
 
     public TopBar() {
-        setBackground(Color.blue);
+        setBackground(Color.decode("#23282a"));
     }
 }

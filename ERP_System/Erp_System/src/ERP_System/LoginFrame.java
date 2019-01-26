@@ -9,26 +9,56 @@ import java.sql.*;
 public class LoginFrame extends JFrame implements ActionListener {
 
     JTextField name, pass;
-    JButton submit;
+    JLabel lname, lpass;
+    JButton submit, newcomp;
     ResultSet rs;
     boolean flag;
     MainFrame mf;
 
     public LoginFrame() {
-        BoxLayout bl = new BoxLayout(getContentPane(), BoxLayout.Y_AXIS);
-        getContentPane().setLayout(bl);
+        GridBagLayout gbl = new GridBagLayout();
+        GridBagConstraints gbc = new GridBagConstraints();
+        getContentPane().setLayout(gbl);
         setBackground(Color.WHITE);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
         pack();
         setSize(500, 500);
+        lname = new JLabel("Name       ");
+        lpass = new JLabel("Password");
         name = new JTextField(10);
         pass = new JTextField(10);
         submit = new JButton("Submit");
+        newcomp = new JButton("Register a new Company");
         submit.addActionListener(this);
-        add(name, CENTER_ALIGNMENT);
-        add(pass , CENTER_ALIGNMENT);
-        add(submit, CENTER_ALIGNMENT);
+        // First Column
+
+        gbc.anchor = GridBagConstraints.CENTER;
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        add(lname, gbc);
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        add(lpass, gbc);
+
+        //Second Column
+        gbc.anchor = GridBagConstraints.CENTER;
+        gbc.gridx = 1;
+        gbc.gridy = 0;
+        add(name, gbc);
+        gbc.gridx = 1;
+        gbc.gridy = 1;
+        add(pass, gbc);
+
+        //Buttons
+        gbc.anchor = GridBagConstraints.LINE_START;
+        gbc.gridx = 1;
+        gbc.gridy = 2;
+        add(submit, gbc);
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        add(newcomp, gbc);
+
     }
 
     @Override
@@ -54,6 +84,11 @@ public class LoginFrame extends JFrame implements ActionListener {
     }
 
     public static void main(String[] args) {
+        try {
+            javax.swing.UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(LoginFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {

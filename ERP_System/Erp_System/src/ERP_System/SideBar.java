@@ -7,9 +7,10 @@ import java.awt.event.MouseListener;
 
 public class SideBar extends JPanel implements MouseListener {
 
-    public SideBar() {
-        setBackground(Color.red);
+    public SideBar(int id) {
+        setBackground(Color.decode("#008db9"));
         setSize(50, 685);
+        System.out.println(id);
         addMouseListener(this);
     }
 

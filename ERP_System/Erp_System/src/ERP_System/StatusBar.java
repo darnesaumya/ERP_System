@@ -6,7 +6,7 @@ import java.awt.*;
 public class StatusBar extends JPanel {
 
     public StatusBar() {
-        setBackground(Color.BLACK);
-        
+        setBackground(Color.decode("#00546f"));
+
     }
 }
