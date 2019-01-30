@@ -1,4 +1,4 @@
-package ERP_System;
+ package ERP_System;
 
 import javax.swing.*;
 import java.awt.*;
