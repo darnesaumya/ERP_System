@@ -3,6 +3,7 @@
 import javax.swing.*;
 import java.awt.*;
 
+
 public class MainFrame extends JFrame {
 
     private final TopBar tb;
@@ -14,7 +15,6 @@ public class MainFrame extends JFrame {
     public MainFrame(String str) {
         BorderLayout bl = new BorderLayout();
         setTitle(str);
-        setSize(1500, 1500);
         setLayout(bl);
         setVisible(true);
 

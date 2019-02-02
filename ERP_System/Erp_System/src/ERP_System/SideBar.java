@@ -6,11 +6,14 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 public class SideBar extends JPanel implements MouseListener {
-
+    private JLabel l1;
     public SideBar(int id) {
         setBackground(Color.decode("#008db9"));
-        setSize(50, 685);
+        setLayout(new FlowLayout());
         System.out.println(id);
+        l1 = new JLabel();
+        l1.setText("Hello his");
+        add(l1);
         addMouseListener(this);
     }
 
@@ -28,13 +31,13 @@ public class SideBar extends JPanel implements MouseListener {
 
     @Override
     public void mouseEntered(MouseEvent e) {
-        setSize(200, 685);
+        setSize(200, 657);
         System.out.println("Mouse Entered");
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
         System.out.println("Mouse exit");
-        setSize(50, 685);
+        setSize(50, 657);
     }
 }

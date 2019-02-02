@@ -4,14 +4,13 @@ import java.io.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-public class InfoPanel extends JPanel implements ActionListener {
+import java.awt.event.ActionListener;public class InfoPanel extends JPanel implements ActionListener {
 
-    public InfoPanel(String c)
-    {
-        setSize(1000,1000);
+    public InfoPanel()
+    {  
         setVisible(true);
-        setBackground(Color.RED);
+        setBackground(Color.decode("#b2cbd3"));
+        
     }
     @Override
     public void actionPerformed(ActionEvent e) {
