@@ -72,7 +72,7 @@ public class LoginFrame extends JFrame implements ActionListener {
             rs = stmt.executeQuery("Select * from Login where UName = '" + n + "' and Password = '" + p + "'");
             if (rs.next()) {
                 flag = true;
-                mf = new MainFrame("hello");
+                mf = new MainFrame();
                 setVisible(false);
             } else {
                 flag = false;

@@ -11,9 +11,8 @@ public class MainFrame extends JFrame {
     private final StatusBar stb;
     int id = 0;
 
-    public MainFrame(String str) {
+    public MainFrame() {
         BorderLayout bl = new BorderLayout();
-        setTitle(str);
         setLayout(bl);
         setVisible(true);
 
@@ -40,7 +39,7 @@ public class MainFrame extends JFrame {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new MainFrame("Welcome");
+                new MainFrame();
             }
         });
     }
