@@ -6,7 +6,9 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 public class SideBar extends JPanel implements MouseListener {
+
     private JLabel l1;
+
     public SideBar(int id) {
         setBackground(Color.decode("#008db9"));
         setLayout(new FlowLayout());
