@@ -8,11 +8,10 @@ import java.sql.*;
 
 public class LoginFrame extends JFrame implements ActionListener {
 
-    JTextField name, pass;
-    JLabel lname, lpass;
+    JTextField cname, ename, pass;
+    JLabel name, lname, lpass;
     JButton submit, newcomp;
     ResultSet rs;
-    boolean flag;
     MainFrame mf;
 
     public LoginFrame() {
@@ -24,10 +23,12 @@ public class LoginFrame extends JFrame implements ActionListener {
         setVisible(true);
         pack();
         setSize(500, 500);
-        lname = new JLabel("Name       ");
+        name = new JLabel("Company Name");
+        lname = new JLabel("Employee Name");
         lpass = new JLabel("Password");
-        name = new JTextField(10);
+        ename = new JTextField(10);
         pass = new JTextField(10);
+        cname = new JTextField(10);
         submit = new JButton("Submit");
         newcomp = new JButton("Register a new Company");
         submit.addActionListener(this);
@@ -36,47 +37,64 @@ public class LoginFrame extends JFrame implements ActionListener {
         gbc.anchor = GridBagConstraints.CENTER;
         gbc.gridx = 0;
         gbc.gridy = 0;
-        add(lname, gbc);
+        add(name, gbc);
         gbc.gridx = 0;
         gbc.gridy = 1;
+        add(lname, gbc);
+        gbc.gridx = 0;
+        gbc.gridy = 2;
         add(lpass, gbc);
 
         //Second Column
         gbc.anchor = GridBagConstraints.CENTER;
         gbc.gridx = 1;
         gbc.gridy = 0;
-        add(name, gbc);
+        add(cname, gbc);
         gbc.gridx = 1;
         gbc.gridy = 1;
+        add(ename, gbc);
+        gbc.gridx = 1;
+        gbc.gridy = 2;
         add(pass, gbc);
 
         //Buttons
         gbc.anchor = GridBagConstraints.LINE_START;
         gbc.gridx = 1;
-        gbc.gridy = 2;
+        gbc.gridy = 3;
         add(submit, gbc);
         gbc.gridx = 0;
-        gbc.gridy = 2;
+        gbc.gridy = 3;
         add(newcomp, gbc);
 
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        String n = name.getText();
+        int id;
+        String query;
+        String c = cname.getText();
+        String n = ename.getText();
         String p = pass.getText();
         try {
             Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
             Connection con = DriverManager.getConnection("jdbc:ucanaccess://src\\ERP_System\\Database\\ERPdb.accdb");
             Statement stmt = con.createStatement();
-            rs = stmt.executeQuery("Select * from Login where UName = '" + n + "' and Password = '" + p + "'");
+            PreparedStatement pst;
+            rs = stmt.executeQuery("Select C_ID from Company where CName = '" + c + "'");
             if (rs.next()) {
-                flag = true;
-                mf = new MainFrame();
-                setVisible(false);
-            } else {
-                flag = false;
-                System.out.println("Login failed");
+                id = rs.getInt("C_ID");
+                query = "Select E_ID from Employee where C_ID = ? and EName = ? and Password = ? ";
+                pst = con.prepareStatement(query);
+                pst.setInt(1, id);
+                pst.setString(2, n);
+                pst.setString(3, p);
+                rs = pst.executeQuery();
+                if (rs.next()) {
+                    mf = new MainFrame(rs.getInt("E_ID"));
+                    setVisible(false);
+                } else {
+                    System.out.println("Login failed");
+                }
             }
         } catch (ClassNotFoundException | SQLException ec) {
             System.out.println(ec);
