@@ -21,7 +21,6 @@ public class LoginFrame extends JFrame implements ActionListener {
         setBackground(Color.WHITE);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
-        pack();
         setSize(500, 500);
         name = new JLabel("Company Name");
         lname = new JLabel("Employee Name");
@@ -34,14 +33,12 @@ public class LoginFrame extends JFrame implements ActionListener {
         submit.addActionListener(this);
         // First Column
 
-        gbc.anchor = GridBagConstraints.CENTER;
+        gbc.anchor = GridBagConstraints.LINE_START;
         gbc.gridx = 0;
         gbc.gridy = 0;
         add(name, gbc);
-        gbc.gridx = 0;
         gbc.gridy = 1;
         add(lname, gbc);
-        gbc.gridx = 0;
         gbc.gridy = 2;
         add(lpass, gbc);
 
@@ -50,10 +47,8 @@ public class LoginFrame extends JFrame implements ActionListener {
         gbc.gridx = 1;
         gbc.gridy = 0;
         add(cname, gbc);
-        gbc.gridx = 1;
         gbc.gridy = 1;
         add(ename, gbc);
-        gbc.gridx = 1;
         gbc.gridy = 2;
         add(pass, gbc);
 
