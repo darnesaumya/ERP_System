@@ -85,7 +85,7 @@ public class LoginFrame extends JFrame implements ActionListener {
                 pst.setString(3, p);
                 rs = pst.executeQuery();
                 if (rs.next()) {
-                    mf = new MainFrame(rs.getInt("E_ID"));
+                    mf = new MainFrame(rs.getInt("E_ID"), id);
                     setVisible(false);
                 } else {
                     System.out.println("Login failed");

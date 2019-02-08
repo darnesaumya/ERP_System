@@ -12,7 +12,6 @@ public class SideBar extends JPanel implements MouseListener {
     public SideBar(int id) {
         setBackground(Color.decode("#008db9"));
         setLayout(new FlowLayout());
-        System.out.println(id);
         l1 = new JLabel();
         l1.setText("Hello his");
         add(l1);

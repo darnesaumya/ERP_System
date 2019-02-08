@@ -15,8 +15,10 @@ public class CenterPanel extends JPanel implements ActionListener{
     InfoPanel ip5;
     InfoPanel ip6;
     JButton b1;
+    int cid;
 
-    public CenterPanel() {
+    public CenterPanel(int cid) {
+        this.cid = cid;
         setBackground(Color.decode("#e9e9e9"));
         setVisible(true);
         setLayout(new GridLayout(2, 3));
@@ -45,6 +47,6 @@ public class CenterPanel extends JPanel implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        AddProduct obj = new AddProduct();
+        AddProduct obj = new AddProduct(this.cid);
     }
 }

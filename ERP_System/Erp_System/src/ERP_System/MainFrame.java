@@ -14,11 +14,11 @@ public class MainFrame extends JFrame {
     private final SideBar sb;
     private final CenterPanel cp;
     private final StatusBar stb;
-    int E_id;
+    int E_id, cid;
     String sql,Ename;
   
 
-    public MainFrame(int E_id) {
+    public MainFrame(int E_id,int cid) {
         this.E_id = E_id;
         BorderLayout bl = new BorderLayout();
         setLayout(bl);
@@ -46,7 +46,7 @@ public class MainFrame extends JFrame {
         }
         sb = new SideBar(E_id);
         tb = new TopBar(Ename);
-        cp = new CenterPanel();
+        cp = new CenterPanel(cid);
         stb = new StatusBar();
         add(sb, BorderLayout.LINE_START);
         add(tb, BorderLayout.NORTH);
@@ -55,17 +55,17 @@ public class MainFrame extends JFrame {
         
     }
 
-    public static void main(String[] args) {
-        try {
-            javax.swing.UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new MainFrame(2);
-            }
-        });
-    }
+//    public static void main(String[] args) {
+//        try {
+//            javax.swing.UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+//        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        SwingUtilities.invokeLater(new Runnable() {
+//            @Override
+//            public void run() {
+//                new MainFrame(2,3);
+//            }
+//        });
+//    }
 }
