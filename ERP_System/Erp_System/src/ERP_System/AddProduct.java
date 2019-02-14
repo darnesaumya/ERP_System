@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -19,8 +20,8 @@ public class AddProduct extends JFrame implements ActionListener {
     JLabel l1, l2, l3, l4, l5;
     JButton btn;
     JTextField pid, pname, quantity, price, tax;
-    String id, name, quant, pr, tx;
-    int cid;
+    String name;
+    int id, quant, pr, tx, cid;
 
     public AddProduct(int cid) {
         this.cid = cid;
@@ -86,18 +87,31 @@ public class AddProduct extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         System.out.println(cid);
-        id = pid.getText();
+        id = Integer.parseInt(pid.getText());
         name = pname.getText();
-        quant = quantity.getText();
-        pr = price.getText();
-        tx = tax.getText();
-        String query = "Insert into Product values (?,?,?)";
+        quant = Integer.parseInt(quantity.getText());
+        pr = Integer.parseInt(price.getText());
+        tx = Integer.parseInt(tax.getText());
+        System.out.println(name);
+        String query = "Insert into Product (P_ID,C_ID,P_Name,Price,Tax,Quantity) values ( ? , ? , ? , ? , ? , ?)";
         try {
             Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
             Connection con = DriverManager.getConnection("jdbc:ucanaccess://src\\ERP_System\\Database\\ERPdb.accdb");
-            //PreparedStatement pst;
+            PreparedStatement stmt = con.prepareStatement(query);
+            stmt.setInt(1,id);
+            stmt.setInt(2,cid);
+            System.out.println(stmt);
+            stmt.setString(3, name); // error is triggerred by this statement
+            System.out.println(stmt);
+            stmt.setInt(4,pr);
+            stmt.setInt(5,tx);
+            stmt.setInt(6,quant);
+            System.out.println("Hello3");
+            ResultSet rs;
+            stmt.execute();    
+            System.out.println("Hello3");
         } catch (ClassNotFoundException | SQLException ex) {
-            System.out.println(ex.getMessage());
+            System.out.println(ex);
         }
     }
 }
