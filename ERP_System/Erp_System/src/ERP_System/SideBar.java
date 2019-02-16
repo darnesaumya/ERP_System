@@ -14,7 +14,8 @@ public class SideBar extends JPanel implements MouseListener {
         this.id = id;
         setBackground(Color.decode("#008db9"));
         setLayout(new FlowLayout());
-        l1 = new JLabel("Hello his");
+        l1 = new JLabel("Add Debtor");
+        l1.addMouseListener(this);
         l2 = new JLabel("Add Product");
         l2.addMouseListener(this);
         l3 = new JLabel("Add Creditor");
@@ -33,9 +34,13 @@ public class SideBar extends JPanel implements MouseListener {
         {
             AddProduct obj = new AddProduct(id);
         }
-        else
+        else if(e.getSource() == l3)
         {
             AddCreditor obj = new AddCreditor(id);
+        }
+        else
+        {
+            AddDebtor obj = new AddDebtor(id);
         }
     }
 
