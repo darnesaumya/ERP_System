@@ -14,15 +14,15 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-public class AddProduct extends JFrame implements ActionListener {
+public class AddCreditor extends JFrame implements ActionListener {
 
-    JLabel l1, l2, l3, l4, l5;
+    JLabel l1, l2, l3;
     JButton btn;
-    JTextField pid, pname, quantity, price, tax;
-    String name;
-    int id, quant, pr, tx, cid;
+    JTextField crid, crname, contact;
+    String cr_name,cont;
+    int cr_id, cid;
 
-    public AddProduct(int cid) {
+    public AddCreditor(int cid) {
         this.cid = cid;
         GridBagLayout gbl = new GridBagLayout();
         GridBagConstraints gbc = new GridBagConstraints();
@@ -31,20 +31,14 @@ public class AddProduct extends JFrame implements ActionListener {
         setLayout(gbl);
         setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         setBackground(Color.WHITE);
-        l1 = new JLabel("Product ID");
-        l2 = new JLabel("Product Name");
-        l3 = new JLabel("Quantity");
-        l4 = new JLabel("Price");
-        l5 = new JLabel("Tax Percent");
-
-        btn = new JButton("Add Product");
+        l1 = new JLabel("Creditor ID");
+        l2 = new JLabel("Creditor Name");
+        l3 = new JLabel("Contact Number");
+        crid = new JTextField(10);
+        crname = new JTextField(10);
+        contact = new JTextField(10);
+        btn = new JButton("Add Creditor");
         btn.addActionListener(this);
-
-        pid = new JTextField(10);
-        pname = new JTextField(10);
-        quantity = new JTextField(10);
-        price = new JTextField(10);
-        tax = new JTextField(10);
 
         gbc.weighty = 0.001;
 
@@ -57,53 +51,42 @@ public class AddProduct extends JFrame implements ActionListener {
         add(l2, gbc);
         gbc.gridy = 2;
         add(l3, gbc);
-        gbc.gridy = 3;
-        add(l4, gbc);
-        gbc.gridy = 4;
-        add(l5, gbc);
 
         //Second Column
         gbc.anchor = GridBagConstraints.CENTER;
         gbc.gridx = 1;
         gbc.gridy = 0;
-        add(pid, gbc);
+        add(crid, gbc);
         gbc.gridy = 1;
-        add(pname, gbc);
+        add(crname, gbc);
         gbc.gridy = 2;
-        add(quantity, gbc);
-        gbc.gridy = 3;
-        add(price, gbc);
-        gbc.gridy = 4;
-        add(tax, gbc);
+        add(contact, gbc);
 
         //Button
         gbc.anchor = GridBagConstraints.CENTER;
         gbc.gridx = 0;
-        gbc.gridy = 5;
+        gbc.gridy = 3;
         add(btn, gbc);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        id = Integer.parseInt(pid.getText());
-        name = pname.getText();
-        quant = Integer.parseInt(quantity.getText());
-        pr = Integer.parseInt(price.getText());
-        tx = Integer.parseInt(tax.getText());
-        String query = "Insert into Product (P_ID,C_ID,P_Name,Price,Tax,Quantity) values ( ? , ? , ? , ? , ? , ?)";
+        cr_id = Integer.parseInt(crid.getText());
+        cr_name = crname.getText();
+        cont = contact.getText();
+        String query = "Insert into Creditor (Cr_ID,C_ID,Cr_Name,Contact) values ( ? , ? , ? , ?)";
         try {
             Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
             Connection con = DriverManager.getConnection("jdbc:ucanaccess://src\\ERP_System\\Database\\ERPdb.accdb");
             PreparedStatement stmt = con.prepareStatement(query);
-            stmt.setInt(1,id);
-            stmt.setInt(2,cid);
-            stmt.setString(3, name); // error is triggerred by this statement
-            stmt.setInt(4,pr);
-            stmt.setInt(5,tx);
-            stmt.setInt(6,quant);
-            stmt.execute();    
-        }catch (ClassNotFoundException | SQLException ex) {
+            stmt.setInt(1, cr_id);
+            stmt.setInt(2, cid);
+            stmt.setString(3, cr_name);
+            stmt.setString(4, cont);
+            stmt.execute();
+        } catch (ClassNotFoundException | SQLException ex) {
             System.out.println(ex);
         }
     }
+
 }
