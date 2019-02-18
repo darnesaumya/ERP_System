@@ -31,6 +31,7 @@ public class LoginFrame extends JFrame implements ActionListener {
         submit = new JButton("Submit");
         newcomp = new JButton("Register a new Company");
         submit.addActionListener(this);
+        newcomp.addActionListener(this);
         // First Column
 
         gbc.anchor = GridBagConstraints.LINE_START;
@@ -65,34 +66,40 @@ public class LoginFrame extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        int id;
-        String query;
-        String c = cname.getText();
-        String n = ename.getText();
-        String p = pass.getText();
-        try {
-            Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
-            Connection con = DriverManager.getConnection("jdbc:ucanaccess://src\\ERP_System\\Database\\ERPdb.accdb");
-            Statement stmt = con.createStatement();
-            PreparedStatement pst;
-            rs = stmt.executeQuery("Select C_ID from Company where CName = '" + c + "'");
-            if (rs.next()) {
-                id = rs.getInt("C_ID");
-                query = "Select E_ID from Employee where C_ID = ? and EName = ? and Password = ? ";
-                pst = con.prepareStatement(query);
-                pst.setInt(1, id);
-                pst.setString(2, n);
-                pst.setString(3, p);
-                rs = pst.executeQuery();
+
+        if (e.getSource() == submit) {
+            int id;
+            String query;
+            String c = cname.getText();
+            String n = ename.getText();
+            String p = pass.getText();
+            try {
+                Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+                Connection con = DriverManager.getConnection("jdbc:ucanaccess://src\\ERP_System\\Database\\ERPdb.accdb");
+                Statement stmt = con.createStatement();
+                PreparedStatement pst;
+                rs = stmt.executeQuery("Select C_ID from Company where CName = '" + c + "'");
                 if (rs.next()) {
-                    mf = new MainFrame(rs.getInt("E_ID"), id);
-                    setVisible(false);
-                } else {
-                    System.out.println("Login failed");
+                    id = rs.getInt("C_ID");
+                    query = "Select E_ID from Employee where C_ID = ? and EName = ? and Password = ? ";
+                    pst = con.prepareStatement(query);
+                    pst.setInt(1, id);
+                    pst.setString(2, n);
+                    pst.setString(3, p);
+                    rs = pst.executeQuery();
+                    if (rs.next()) {
+                        mf = new MainFrame(rs.getInt("E_ID"), id);
+                        setVisible(false);
+                    } else {
+                        System.out.println("Login failed");
+                    }
                 }
+            } catch (ClassNotFoundException | SQLException ec) {
+                System.out.println(ec);
             }
-        } catch (ClassNotFoundException | SQLException ec) {
-            System.out.println(ec);
+        }else if(e.getSource() == newcomp)
+        {
+            NewCompany obj = new NewCompany();
         }
     }
 
