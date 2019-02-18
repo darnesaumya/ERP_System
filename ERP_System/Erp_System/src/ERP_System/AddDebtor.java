@@ -21,6 +21,7 @@ public class AddDebtor extends JFrame implements ActionListener {
     JTextField dbid, dbname, contact;
     String db_name,cont;
     int db_id, cid;
+    Verification obj;
 
     public AddDebtor(int cid)
     {
@@ -75,6 +76,9 @@ public class AddDebtor extends JFrame implements ActionListener {
         db_id = Integer.parseInt(dbid.getText());
         db_name = dbname.getText();
         cont = contact.getText();
+        obj = new Verification();
+        if(obj.verifyEmail(cont))
+        {
         String query = "Insert into Debtor (D_ID,C_ID,D_Name,Contact) values ( ? , ? , ? , ?)";
         try {
             Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
@@ -88,6 +92,9 @@ public class AddDebtor extends JFrame implements ActionListener {
         } catch (ClassNotFoundException | SQLException ex) {
             System.out.println(ex);
         }
+        }
+        else
+            System.out.println("Check the number entered");
 
     }
 }

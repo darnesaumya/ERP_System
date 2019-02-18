@@ -19,8 +19,9 @@ public class AddCreditor extends JFrame implements ActionListener {
     JLabel l1, l2, l3;
     JButton btn;
     JTextField crid, crname, contact;
-    String cr_name,cont;
+    String cr_name, cont;
     int cr_id, cid;
+    Verification obj;
 
     public AddCreditor(int cid) {
         this.cid = cid;
@@ -74,18 +75,23 @@ public class AddCreditor extends JFrame implements ActionListener {
         cr_id = Integer.parseInt(crid.getText());
         cr_name = crname.getText();
         cont = contact.getText();
-        String query = "Insert into Creditor (Cr_ID,C_ID,Cr_Name,Contact) values ( ? , ? , ? , ?)";
-        try {
-            Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
-            Connection con = DriverManager.getConnection("jdbc:ucanaccess://src\\ERP_System\\Database\\ERPdb.accdb");
-            PreparedStatement stmt = con.prepareStatement(query);
-            stmt.setInt(1, cr_id);
-            stmt.setInt(2, cid);
-            stmt.setString(3, cr_name);
-            stmt.setString(4, cont);
-            stmt.execute();
-        } catch (ClassNotFoundException | SQLException ex) {
-            System.out.println(ex);
+        obj = new Verification();
+        if (obj.verifyNumber(cont)) {
+            String query = "Insert into Creditor (Cr_ID,C_ID,Cr_Name,Contact) values ( ? , ? , ? , ?)";
+            try {
+                Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+                Connection con = DriverManager.getConnection("jdbc:ucanaccess://src\\ERP_System\\Database\\ERPdb.accdb");
+                PreparedStatement stmt = con.prepareStatement(query);
+                stmt.setInt(1, cr_id);
+                stmt.setInt(2, cid);
+                stmt.setString(3, cr_name);
+                stmt.setString(4, cont);
+                stmt.execute();
+            } catch (ClassNotFoundException | SQLException ex) {
+                System.out.println(ex);
+            }
+        } else {
+            System.out.println("Check mobile number entered");
         }
     }
 

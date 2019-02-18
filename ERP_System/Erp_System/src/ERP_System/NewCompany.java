@@ -26,6 +26,7 @@ public class NewCompany extends JFrame implements ActionListener {
     Connection con;
     Statement stmt;
     ResultSet rs;
+    Verification obj;
 
     public NewCompany() {
         GridBagLayout gbl = new GridBagLayout();
@@ -99,30 +100,41 @@ public class NewCompany extends JFrame implements ActionListener {
         address = Address.getText();
         email = Email.getText();
         contact = Contact.getText();
-        String query = "Select max (C_ID) from Company";
-        try {
-            Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
-            con = DriverManager.getConnection("jdbc:ucanaccess://src\\ERP_System\\Database\\ERPdb.accdb");
-            stmt = con.createStatement();
-            rs = stmt.executeQuery(query);
-            while (rs.next()) {
-                cid = rs.getInt(1);
+        obj = new Verification();
+        if (obj.verifyGST(gst) && obj.verifyEmail(email) && obj.verifyNumber(contact)) {
+            String query = "Select max (C_ID) from Company";
+            try {
+                Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+                con = DriverManager.getConnection("jdbc:ucanaccess://src\\ERP_System\\Database\\ERPdb.accdb");
+                stmt = con.createStatement();
+                rs = stmt.executeQuery(query);
+                while (rs.next()) {
+                    cid = rs.getInt(1);
+                }
+                cid++;
+                System.out.println(cid);
+                query = "Insert into Company (C_ID, CName, Owner, HQ_Address, GST_No, Email, Contact_No)  values (?,?,?,?,?,?,?)";
+                PreparedStatement pst = con.prepareStatement(query);
+                pst.setInt(1, cid);
+                pst.setString(2, CName);
+                pst.setString(3, owner);
+                pst.setString(4, address);
+                pst.setString(5, gst);
+                pst.setString(6, email);
+                pst.setString(7, contact);
+                pst.execute();
+            } catch (ClassNotFoundException | SQLException ex) {
+                System.out.println(ex);
             }
-            cid++;
-            System.out.println(cid);
-            query = "Insert into Company (C_ID, CName, Owner, HQ_Address, GST_No, Email, Contact_No)  values (?,?,?,?,?,?,?)";
-            PreparedStatement pst = con.prepareStatement(query);
-            pst.setInt(1, cid);
-            pst.setString(2, CName);
-            pst.setString(3, owner);
-            pst.setString(4, address);
-            pst.setString(5, gst);
-            pst.setString(6, email);
-            pst.setString(7, contact);
-            pst.execute();
-        } catch (ClassNotFoundException | SQLException ex) {
-            System.out.println(ex);
         }
-
+        else
+        {
+            if(obj.verifyEmail(email) == false)
+                System.out.println("Check the email address entered");
+            else if(obj.verifyGST(gst) == false)
+                System.out.println("Check the GST number entered");
+            else
+                System.out.println("Check the phone number entered");
+        }
     }
 }
