@@ -17,17 +17,17 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 public class NewCompany extends JFrame implements ActionListener {
-    
+
     int cid;
-    JLabel l1,l2,l3,l4,l5,l6;
-    JTextField C_Name,Owner,Address,GST,Email,Contact; 
+    JLabel l1, l2, l3, l4, l5, l6;
+    JTextField C_Name, Owner, Address, GST, Email, Contact;
     JButton submit;
-    String CName,owner,address,gst,email,contact;
+    String CName, owner, address, gst, email, contact;
     Connection con;
     Statement stmt;
     ResultSet rs;
-    public NewCompany()
-    {
+
+    public NewCompany() {
         GridBagLayout gbl = new GridBagLayout();
         GridBagConstraints gbc = new GridBagConstraints();
         setSize(400, 650);
@@ -49,7 +49,7 @@ public class NewCompany extends JFrame implements ActionListener {
         Contact = new JTextField(10);
         submit = new JButton("Register");
         submit.addActionListener(this);
-        
+
         gbc.weighty = 0.001;
 
         //First Column
@@ -90,6 +90,7 @@ public class NewCompany extends JFrame implements ActionListener {
         gbc.gridy = 6;
         add(submit, gbc);
     }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         CName = C_Name.getText();
@@ -104,8 +105,7 @@ public class NewCompany extends JFrame implements ActionListener {
             con = DriverManager.getConnection("jdbc:ucanaccess://src\\ERP_System\\Database\\ERPdb.accdb");
             stmt = con.createStatement();
             rs = stmt.executeQuery(query);
-            while(rs.next())
-            {
+            while (rs.next()) {
                 cid = rs.getInt(1);
             }
             cid++;
