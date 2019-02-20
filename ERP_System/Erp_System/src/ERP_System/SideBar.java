@@ -8,10 +8,10 @@ import java.awt.event.MouseListener;
 public class SideBar extends JPanel implements MouseListener {
 
     private JLabel l1, l2, l3;
-    int id;
+    int cid;
 
-    public SideBar(int id) {
-        this.id = id;
+    public SideBar(int cid) {
+        this.cid = cid;
         setBackground(Color.decode("#008db9"));
         setLayout(new FlowLayout());
         l1 = new JLabel("Add Debtor");
@@ -32,15 +32,15 @@ public class SideBar extends JPanel implements MouseListener {
     public void mouseClicked(MouseEvent e) {
         if(e.getSource() == l2)
         {
-            AddProduct obj = new AddProduct(id);
+            AddProduct obj = new AddProduct(cid);
         }
         else if(e.getSource() == l3)
         {
-            AddCreditor obj = new AddCreditor(id);
+            AddCreditor obj = new AddCreditor(cid);
         }
         else
         {
-            AddDebtor obj = new AddDebtor(id);
+            AddDebtor obj = new AddDebtor(cid);
         }
     }
 

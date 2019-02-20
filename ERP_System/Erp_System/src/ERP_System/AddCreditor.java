@@ -86,7 +86,10 @@ public class AddCreditor extends JFrame implements ActionListener {
                 stmt.setInt(2, cid);
                 stmt.setString(3, cr_name);
                 stmt.setString(4, cont);
-                stmt.execute();
+                if(!stmt.execute())
+                {
+                    System.out.println("Error in executing query");
+                }
             } catch (ClassNotFoundException | SQLException ex) {
                 System.out.println(ex);
             }

@@ -121,20 +121,29 @@ public class NewCompany extends JFrame implements ActionListener {
                 pst.setString(4, address);
                 pst.setString(5, gst);
                 pst.setString(6, email);
+                System.out.println("Hello");
                 pst.setString(7, contact);
-                pst.execute();
+                if(pst.execute())
+                {
+                    System.out.println("Error in executing query");
+                }
+                else
+                {
+                    MainFrame mainFrame = new MainFrame(owner, cid);
+                    AddEmployee addEmployee = new AddEmployee(owner,cid);
+                    setVisible(false);
+                }
             } catch (ClassNotFoundException | SQLException ex) {
                 System.out.println(ex);
             }
-        }
-        else
-        {
-            if(obj.verifyEmail(email) == false)
+        } else {
+            if (obj.verifyEmail(email) == false) {
                 System.out.println("Check the email address entered");
-            else if(obj.verifyGST(gst) == false)
+            } else if (obj.verifyGST(gst) == false) {
                 System.out.println("Check the GST number entered");
-            else
+            } else {
                 System.out.println("Check the phone number entered");
+            }
         }
     }
 }

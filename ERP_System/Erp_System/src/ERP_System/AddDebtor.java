@@ -15,16 +15,15 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 public class AddDebtor extends JFrame implements ActionListener {
-    
+
     JLabel l1, l2, l3;
     JButton btn;
     JTextField dbid, dbname, contact;
-    String db_name,cont;
+    String db_name, cont;
     int db_id, cid;
     Verification obj;
 
-    public AddDebtor(int cid)
-    {
+    public AddDebtor(int cid) {
         this.cid = cid;
         GridBagLayout gbl = new GridBagLayout();
         GridBagConstraints gbc = new GridBagConstraints();
@@ -77,24 +76,26 @@ public class AddDebtor extends JFrame implements ActionListener {
         db_name = dbname.getText();
         cont = contact.getText();
         obj = new Verification();
-        if(obj.verifyEmail(cont))
-        {
-        String query = "Insert into Debtor (D_ID,C_ID,D_Name,Contact) values ( ? , ? , ? , ?)";
-        try {
-            Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
-            Connection con = DriverManager.getConnection("jdbc:ucanaccess://src\\ERP_System\\Database\\ERPdb.accdb");
-            PreparedStatement stmt = con.prepareStatement(query);
-            stmt.setInt(1, db_id);
-            stmt.setInt(2, cid);
-            stmt.setString(3, db_name);
-            stmt.setString(4, cont);
-            stmt.execute();
-        } catch (ClassNotFoundException | SQLException ex) {
-            System.out.println(ex);
-        }
-        }
-        else
+        if (obj.verifyEmail(cont)) {
+            String query = "Insert into Debtor (D_ID,C_ID,D_Name,Contact) values ( ? , ? , ? , ?)";
+            try {
+                Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+                Connection con = DriverManager.getConnection("jdbc:ucanaccess://src\\ERP_System\\Database\\ERPdb.accdb");
+                PreparedStatement stmt = con.prepareStatement(query);
+                stmt.setInt(1, db_id);
+                stmt.setInt(2, cid);
+                stmt.setString(3, db_name);
+                stmt.setString(4, cont);
+                if(!stmt.execute())
+                {
+                    System.out.println("Error in executing query");
+                }
+            } catch (ClassNotFoundException | SQLException ex) {
+                System.out.println(ex);
+            }
+        } else {
             System.out.println("Check the number entered");
+        }
 
     }
 }
