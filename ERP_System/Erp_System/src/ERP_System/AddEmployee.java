@@ -126,9 +126,9 @@ public class AddEmployee extends JFrame implements ActionListener {
             pst.setInt(7, salary);
             pst.setString(8, contact);
             if (!pst.execute()) {
-                System.out.println("Error in executing query");
-            } else {
                 System.out.println("Success");
+            } else {
+                System.out.println("Error in executing query");
             }
         } catch (ClassNotFoundException | SQLException ex) {
             System.out.println(ex.getMessage());

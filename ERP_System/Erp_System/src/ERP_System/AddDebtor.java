@@ -76,7 +76,7 @@ public class AddDebtor extends JFrame implements ActionListener {
         db_name = dbname.getText();
         cont = contact.getText();
         obj = new Verification();
-        if (obj.verifyEmail(cont)) {
+        if (obj.verifyNumber(cont)) {
             String query = "Insert into Debtor (D_ID,C_ID,D_Name,Contact) values ( ? , ? , ? , ?)";
             try {
                 Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
@@ -86,7 +86,7 @@ public class AddDebtor extends JFrame implements ActionListener {
                 stmt.setInt(2, cid);
                 stmt.setString(3, db_name);
                 stmt.setString(4, cont);
-                if(!stmt.execute())
+                if(stmt.execute())
                 {
                     System.out.println("Error in executing query");
                 }
