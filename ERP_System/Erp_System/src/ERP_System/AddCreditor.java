@@ -86,8 +86,7 @@ public class AddCreditor extends JFrame implements ActionListener {
                 stmt.setInt(2, cid);
                 stmt.setString(3, cr_name);
                 stmt.setString(4, cont);
-                if(stmt.execute())
-                {
+                if (stmt.execute()) {
                     System.out.println("Error in executing query");
                 }
             } catch (ClassNotFoundException | SQLException ex) {
@@ -97,5 +96,4 @@ public class AddCreditor extends JFrame implements ActionListener {
             System.out.println("Check mobile number entered");
         }
     }
-
 }

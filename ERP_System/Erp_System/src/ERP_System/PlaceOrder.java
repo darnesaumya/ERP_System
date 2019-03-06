@@ -1,0 +1,72 @@
+package ERP_System;
+
+import java.awt.Color;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+
+public class PlaceOrder extends JFrame implements ActionListener {
+    JTextField tf1,tf2,tf3;
+    JLabel l1,l2,l3;
+    JButton  btn;
+    String crName,iName;
+    int quantity,c_id,cr_id;
+    public PlaceOrder(int c_id)
+    {
+        this.c_id = c_id;
+        setSize(400,650);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        GridBagLayout gbl = new GridBagLayout();
+        GridBagConstraints gbc = new GridBagConstraints();
+        setLayout(gbl);
+        setBackground(Color.white);
+        setVisible(true);
+        l1 = new JLabel("Creditor Name");
+        l2 = new JLabel("Item Name");
+        l3 = new JLabel("Quantity");
+        tf1 = new JTextField(10);
+        tf2 = new JTextField(10);
+        tf3 = new JTextField(10);
+        btn = new JButton("Place Order");
+        btn.addActionListener(this);
+        
+        gbc.weighty = 0.01;
+        
+        //First Column        
+        gbc.anchor = GridBagConstraints.LINE_START;
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        add(l1, gbc);
+        gbc.gridy = 1;
+        add(l2, gbc);
+        gbc.gridy = 2;
+        add(l3, gbc);
+
+        //Second Column
+        gbc.anchor = GridBagConstraints.CENTER;
+        gbc.gridx = 1;
+        gbc.gridy = 0;
+        add(tf1, gbc);
+        gbc.gridy = 1;
+        add(tf2, gbc);
+        gbc.gridy = 2;
+        add(tf3, gbc);
+
+        //Button
+        gbc.gridx = 0;
+        gbc.gridy = 7;
+        add(btn, gbc);
+
+    }
+    
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+    
+}

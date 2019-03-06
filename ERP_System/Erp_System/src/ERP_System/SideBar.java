@@ -7,7 +7,7 @@ import java.awt.event.MouseListener;
 
 public class SideBar extends JPanel implements MouseListener {
 
-    private JLabel l1, l2, l3;
+    final private JLabel l1, l2, l3, l4;
     int cid;
 
     public SideBar(int cid) {
@@ -20,11 +20,15 @@ public class SideBar extends JPanel implements MouseListener {
         l2.addMouseListener(this);
         l3 = new JLabel("Add Creditor");
         l3.addMouseListener(this);
+        l4 = new JLabel("Place order");
+        l4.addMouseListener(this);
         add(l1);
         add(l2);
         add(l3);
+        add(l4);
         l2.setVisible(false);
         l3.setVisible(false);
+        l4.setVisible(false);
         addMouseListener(this);
     }
 
@@ -38,9 +42,13 @@ public class SideBar extends JPanel implements MouseListener {
         {
             AddCreditor obj = new AddCreditor(cid);
         }
-        else
+        else if(e.getSource() == l1)
         {
             AddDebtor obj = new AddDebtor(cid);
+        }
+        else if(e.getSource() == l4)
+        {
+            PlaceOrder obj = new PlaceOrder(cid);
         }
     }
 

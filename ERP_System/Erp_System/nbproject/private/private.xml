@@ -1,16 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="1">
+        <file>
+            <url>src/ERP_System/AddEmployee.java</url>
+            <bookmark id="1">
+                <name/>
+                <line>0</line>
+                <key/>
+            </bookmark>
+        </file>
+    </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/HP-PC/Documents/Projects/Erp_System/ERP_System/Erp_System/src/ERP_System/SideBar.java</file>
-            <file>file:/C:/Users/HP-PC/Documents/Projects/Erp_System/ERP_System/Erp_System/src/ERP_System/NewCompany.java</file>
-            <file>file:/C:/Users/HP-PC/Documents/Projects/Erp_System/ERP_System/Erp_System/src/ERP_System/AddCreditor.java</file>
-            <file>file:/C:/Users/HP-PC/Documents/Projects/Erp_System/ERP_System/Erp_System/src/ERP_System/LoginFrame.java</file>
+            <file>file:/C:/Users/HP-PC/Documents/Projects/Erp_System/ERP_System/Erp_System/src/ERP_System/PlaceOrder.java</file>
             <file>file:/C:/Users/HP-PC/Documents/Projects/Erp_System/ERP_System/Erp_System/src/ERP_System/AddEmployee.java</file>
             <file>file:/C:/Users/HP-PC/Documents/Projects/Erp_System/ERP_System/Erp_System/src/ERP_System/AddDebtor.java</file>
             <file>file:/C:/Users/HP-PC/Documents/Projects/Erp_System/ERP_System/Erp_System/src/ERP_System/Verification.java</file>
-            <file>file:/C:/Users/HP-PC/Documents/Projects/Erp_System/ERP_System/Erp_System/src/ERP_System/MainFrame.java</file>
         </group>
     </open-files>
 </project-private>
