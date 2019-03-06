@@ -66,6 +66,7 @@ public class SideBar extends JPanel implements MouseListener {
         System.out.println("Mouse Entered");
         l2.setVisible(true);
         l3.setVisible(true);
+        l4.setVisible(true);
     }
 
     @Override
@@ -74,5 +75,6 @@ public class SideBar extends JPanel implements MouseListener {
         setSize(50, 657);
         l2.setVisible(false);
         l3.setVisible(false);
+        l4.setVisible(false);
     }
 }

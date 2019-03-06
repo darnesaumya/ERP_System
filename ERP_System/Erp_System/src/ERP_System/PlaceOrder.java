@@ -5,6 +5,11 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -16,6 +21,10 @@ public class PlaceOrder extends JFrame implements ActionListener {
     JButton  btn;
     String crName,iName;
     int quantity,c_id,cr_id;
+    Connection con;
+    ResultSet rs;
+    Statement stmt;
+    PreparedStatement pst;
     public PlaceOrder(int c_id)
     {
         this.c_id = c_id;
@@ -59,14 +68,40 @@ public class PlaceOrder extends JFrame implements ActionListener {
 
         //Button
         gbc.gridx = 0;
-        gbc.gridy = 7;
+        gbc.gridy = 3;
         add(btn, gbc);
 
     }
     
     @Override
     public void actionPerformed(ActionEvent e) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        crName = tf1.getText();
+        iName = tf2.getText();
+        quantity = Integer.parseInt(tf3.getText());
+        String query = "Select Cr_ID from Creditor where Cr_name = '" + crName + "'";
+        try
+        {
+            Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+            con = DriverManager.getConnection("jdbc:ucanaccess://src\\ERP_System\\Database\\ERPdb.accdb");
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(query);
+            while(rs.next())
+            {
+                cr_id = rs.getInt("Cr_ID");
+            }
+            if(cr_id == 0)
+            {
+                System.out.println("Invalid Creditor Name");
+            }
+            else
+            {
+                
+            }
+        }
+        catch(Exception ex)
+        {
+            
+        }
     }
     
 }
