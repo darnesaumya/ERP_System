@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -16,20 +17,21 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 public class PlaceOrder extends JFrame implements ActionListener {
-    JTextField tf1,tf2,tf3;
-    JLabel l1,l2,l3;
-    JButton  btn;
-    String crName,iName;
-    int quantity,c_id,cr_id;
+
+    JTextField tf1, tf2, tf3;
+    JLabel l1, l2, l3;
+    JButton btn;
+    String crName, iName;
+    int quantity, c_id, cr_id;
     Connection con;
     ResultSet rs;
     Statement stmt;
     PreparedStatement pst;
-    public PlaceOrder(int c_id)
-    {
+
+    public PlaceOrder(int c_id) {
         this.c_id = c_id;
-        setSize(400,650);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(400, 650);
+        setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         GridBagLayout gbl = new GridBagLayout();
         GridBagConstraints gbc = new GridBagConstraints();
         setLayout(gbl);
@@ -43,9 +45,9 @@ public class PlaceOrder extends JFrame implements ActionListener {
         tf3 = new JTextField(10);
         btn = new JButton("Place Order");
         btn.addActionListener(this);
-        
+
         gbc.weighty = 0.01;
-        
+
         //First Column        
         gbc.anchor = GridBagConstraints.LINE_START;
         gbc.gridx = 0;
@@ -72,36 +74,36 @@ public class PlaceOrder extends JFrame implements ActionListener {
         add(btn, gbc);
 
     }
-    
+
     @Override
     public void actionPerformed(ActionEvent e) {
         crName = tf1.getText();
         iName = tf2.getText();
         quantity = Integer.parseInt(tf3.getText());
         String query = "Select Cr_ID from Creditor where Cr_name = '" + crName + "'";
-        try
-        {
+        try {
             Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
             con = DriverManager.getConnection("jdbc:ucanaccess://src\\ERP_System\\Database\\ERPdb.accdb");
             stmt = con.createStatement();
             rs = stmt.executeQuery(query);
-            while(rs.next())
-            {
+            if (rs.next()) {
                 cr_id = rs.getInt("Cr_ID");
-            }
-            if(cr_id == 0)
-            {
+                query = "Insert into Order(C_ID, Cr_ID, Item, Quantity) values(?,?,?,?)";
+                pst = con.prepareStatement(query);
+                pst.setInt(1, c_id);
+                pst.setInt(2, cr_id);
+                pst.setString(3, crName);
+                pst.setInt(4, quantity);
+                if (pst.execute()) {
+                    System.out.println("Error in executing query");
+                } else {
+                    System.out.println("Success");
+                }
+            } else {
                 System.out.println("Invalid Creditor Name");
             }
-            else
-            {
-                
-            }
-        }
-        catch(Exception ex)
-        {
-            
+        } catch (ClassNotFoundException | SQLException ex) {
+            System.out.println(ex);
         }
     }
-    
 }

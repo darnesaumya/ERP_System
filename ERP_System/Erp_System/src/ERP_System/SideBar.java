@@ -7,7 +7,7 @@ import java.awt.event.MouseListener;
 
 public class SideBar extends JPanel implements MouseListener {
 
-    final private JLabel l1, l2, l3, l4;
+    final private JLabel l1, l2, l3, l4, l5;
     int cid;
 
     public SideBar(int cid) {
@@ -22,33 +22,32 @@ public class SideBar extends JPanel implements MouseListener {
         l3.addMouseListener(this);
         l4 = new JLabel("Place order");
         l4.addMouseListener(this);
+        l5 = new JLabel("Add Employee");
+        l5.addMouseListener(this);
         add(l1);
         add(l2);
         add(l3);
         add(l4);
+        add(l5);
         l2.setVisible(false);
         l3.setVisible(false);
         l4.setVisible(false);
+        l5.setVisible(false);
         addMouseListener(this);
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        if(e.getSource() == l2)
-        {
+        if (e.getSource() == l2) {
             AddProduct obj = new AddProduct(cid);
-        }
-        else if(e.getSource() == l3)
-        {
+        } else if (e.getSource() == l3) {
             AddCreditor obj = new AddCreditor(cid);
-        }
-        else if(e.getSource() == l1)
-        {
+        } else if (e.getSource() == l1) {
             AddDebtor obj = new AddDebtor(cid);
-        }
-        else if(e.getSource() == l4)
-        {
+        } else if (e.getSource() == l4) {
             PlaceOrder obj = new PlaceOrder(cid);
+        } else if (e.getSource() == l5) {
+            AddEmployee obj = new AddEmployee("", cid);
         }
     }
 
@@ -67,6 +66,7 @@ public class SideBar extends JPanel implements MouseListener {
         l2.setVisible(true);
         l3.setVisible(true);
         l4.setVisible(true);
+        l5.setVisible(true);
     }
 
     @Override
@@ -76,5 +76,6 @@ public class SideBar extends JPanel implements MouseListener {
         l2.setVisible(false);
         l3.setVisible(false);
         l4.setVisible(false);
+        l5.setVisible(false);
     }
 }

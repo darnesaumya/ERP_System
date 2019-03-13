@@ -1,50 +1,68 @@
 package ERP_System;
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.BorderLayout;
+import javax.swing.JFrame;
 
-public class MainFrame extends JFrame {
+public class MainFrame extends javax.swing.JFrame {
 
-    private final TopBar tb;
-    private final SideBar sb;
-    private final CenterPanel cp;
-    private final StatusBar stb;
-    int cid;
-    String sql,Ename;
-  
+    int id;
+    String s;
 
-    public MainFrame(String Ename,int cid) {
-        this.Ename = Ename;
-        this.cid = cid;
-        BorderLayout bl = new BorderLayout();
-        setLayout(bl);
-        setSize(1280,720);
-        setVisible(true);
-        setExtendedState(JFrame.MAXIMIZED_BOTH);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        getContentPane().setBackground(Color.white);
-        sb = new SideBar(this.cid);
-        tb = new TopBar(this.Ename);
-        cp = new CenterPanel(this.cid);
-        stb = new StatusBar();
-        add(sb, BorderLayout.LINE_START);
-        add(tb, BorderLayout.NORTH);
-        add(cp, BorderLayout.CENTER);
-        add(stb, BorderLayout.SOUTH);
-        
+    public MainFrame() {
+        initComponents();
     }
 
-    public static void main(String[] args) {
+    public MainFrame(String s, int id) {
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setVisible(true);
+        this.s = s;
+        this.id = id;
+        setLayout(new BorderLayout());
+        SideBar sb = new SideBar(this.id);
+        sb.setVisible(true);
+        add(sb, BorderLayout.WEST);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    public static void main(String args[]) {
         try {
-            javax.swing.UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
-           } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
+
+        java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MainFrame("ABC",3);
+                new MainFrame().setVisible(true);
             }
         });
     }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    // End of variables declaration//GEN-END:variables
 }
