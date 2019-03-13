@@ -1,137 +1,235 @@
 package ERP_System;
 
-import java.awt.Color;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import javax.swing.JButton;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
 
 public class AddEmployee extends JFrame implements ActionListener {
 
-    String Ename, pass, desig, contact;
-    int eid, age, salary;
-    int cid;
-    JTextField E_id, E_name, Password, Age, Desig, Salary, Contact;
-    JLabel l1, l2, l3, l4, l5, l6, l7;
-    JButton btn;
+    String ename,cont, pass, designation;
+    int cid, eno, a, sal;
+    Verification obj;
     Connection con;
-    PreparedStatement pst;
-
-    public AddEmployee(String Ename, int cid) {
-        this.Ename = Ename;
+    public AddEmployee(String ename, int cid) {
+        this.ename = ename;
         this.cid = cid;
-        GridBagLayout gbl = new GridBagLayout();
-        GridBagConstraints gbc = new GridBagConstraints();
-        setSize(400, 650);
+        initComponents();
         setVisible(true);
-        setLayout(gbl);
         setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-        setBackground(Color.WHITE);
-        l1 = new JLabel("Employee ID");
-        l2 = new JLabel("Employee Name");
-        l3 = new JLabel("Password");
-        l4 = new JLabel("Age");
-        l5 = new JLabel("Designation");
-        l6 = new JLabel("Salary");
-        l7 = new JLabel("Contact");
-
-        E_id = new JTextField(10);
-        E_name = new JTextField(10);
-        E_name.setText(Ename);
-        Password = new JTextField(10);
-        Age = new JTextField(10);
-        Desig = new JTextField(10);
-        Salary = new JTextField(10);
-        Contact = new JTextField(10);
-        
-        btn = new JButton("Add");
-
-        btn.addActionListener(this);
-
-        gbc.weighty = 0.001;
-
-        //First Column
-        gbc.anchor = GridBagConstraints.LINE_START;
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        add(l1, gbc);
-        gbc.gridy = 1;
-        add(l2, gbc);
-        gbc.gridy = 2;
-        add(l3, gbc);
-        gbc.gridy = 3;
-        add(l4, gbc);
-        gbc.gridy = 4;
-        add(l5, gbc);
-        gbc.gridy = 5;
-        add(l6, gbc);
-        gbc.gridy = 6;
-        add(l7, gbc);
-
-        //Second Column
-        gbc.anchor = GridBagConstraints.CENTER;
-        gbc.gridx = 1;
-        gbc.gridy = 0;
-        add(E_id, gbc);
-        gbc.gridy = 1;
-        add(E_name, gbc);
-        gbc.gridy = 2;
-        add(Password, gbc);
-        gbc.gridy = 3;
-        add(Age, gbc);
-        gbc.gridy = 4;
-        add(Desig, gbc);
-        gbc.gridy = 5;
-        add(Salary, gbc);
-        gbc.gridy = 6;
-        add(Contact, gbc);
-
-        //Button
-        gbc.gridx = 0;
-        gbc.gridy = 7;
-        add(btn, gbc);
-
+        jButton1.addActionListener(this);
+        jButton2.addActionListener(this);
+        e_name.setText(ename);
     }
+
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        jLabel1 = new javax.swing.JLabel();
+        e_no = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        password = new javax.swing.JTextField();
+        age = new javax.swing.JTextField();
+        desig = new javax.swing.JTextField();
+        salary = new javax.swing.JTextField();
+        contact = new javax.swing.JTextField();
+        e_name = new javax.swing.JTextField();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel1.setText("Employee Number");
+
+        jLabel2.setText("Age");
+
+        jLabel3.setText("Employee Name");
+
+        jLabel4.setText("Password");
+
+        jLabel5.setText("Designation");
+
+        jLabel6.setText("Salary");
+
+        jLabel7.setText("Contact Number");
+
+        jButton1.setText("Confirm");
+
+        jButton2.setText("Cancel");
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(75, 75, 75)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(contact, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(e_no, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton1)
+                            .addComponent(salary, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(desig, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(age, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(e_name, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(91, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(75, 75, 75)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(e_no, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(e_name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(19, 19, 19)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(age, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(desig, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(salary, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(contact, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
+                .addContainerGap(75, Short.MAX_VALUE))
+        );
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(AddEmployee.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(AddEmployee.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(AddEmployee.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(AddEmployee.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new AddEmployee().setVisible(true);
+//            }
+//        });
+//    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        eid = Integer.parseInt(E_id.getText());
-        Ename = E_name.getText();
-        pass = Password.getText();
-        age = Integer.parseInt(Age.getText());
-        desig = Desig.getText();
-        salary = Integer.parseInt(Salary.getText());
-        contact = Contact.getText();
-        String query = "Insert into Employee (E_ID, C_ID, EName, Password, Age, Designation, Salary, Contact_no) values (?, ?, ?, ?, ?, ?, ? ,?)";
-
-        try {
-            Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
-            con = DriverManager.getConnection("jdbc:ucanaccess://src\\ERP_System\\Database\\ERPdb.accdb");
-            pst = con.prepareStatement(query);
-            pst.setInt(1, eid);
-            pst.setInt(2, cid);
-            pst.setString(3, Ename);
-            pst.setString(4, pass);
-            pst.setInt(5, age);
-            pst.setString(6, desig);
-            pst.setInt(7, salary);
-            pst.setString(8, contact);
-            if (!pst.execute()) {
-                System.out.println("Success");
-            } else {
-                System.out.println("Error in executing query");
+        if(e.getSource() == jButton1)
+        {
+            eno = Integer.parseInt(e_no.getText());
+            ename = e_name.getText();
+            pass = password.getText();
+            cont = contact.getText();
+            designation = desig.getText();
+            a = Integer.parseInt(age.getText());
+            sal = Integer.parseInt(salary.getText());
+            obj = new Verification();
+            if(obj.verifyNumber(cont) == true)
+            {
+                try {
+                    Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+                    con = DriverManager.getConnection("jdbc:ucanaccess://src\\ERP_System\\Database\\ERPdb.accdb");
+                    String sql = "Insert into Employee (E_ID, C_ID, EName, Password, Age, Designation, Salary, Contact_no) values (?, ?, ?, ?, ?, ?, ?, ?)";
+                    PreparedStatement pst = con.prepareStatement(sql);
+                    pst.setInt(1, eno);
+                    pst.setInt(2, cid);
+                    pst.setString(3, ename);
+                    pst.setString(4, pass);
+                    pst.setInt(5, a);
+                    pst.setString(6, designation);
+                    pst.setInt(7, sal);
+                    pst.setString(8, cont);
+                    if(!pst.execute()){
+                        System.out.println("Success");
+                    } else
+                        System.out.println("Error in executing query");
+                } catch (ClassNotFoundException | SQLException ex) {
+                    Logger.getLogger(AddEmployee.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
-        } catch (ClassNotFoundException | SQLException ex) {
-            System.out.println(ex.getMessage());
+        }else if(e.getSource() == jButton2)
+        {
+            
         }
-
     }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField age;
+    private javax.swing.JTextField contact;
+    private javax.swing.JTextField desig;
+    private javax.swing.JTextField e_name;
+    private javax.swing.JTextField e_no;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JTextField password;
+    private javax.swing.JTextField salary;
+    // End of variables declaration//GEN-END:variables
 }
