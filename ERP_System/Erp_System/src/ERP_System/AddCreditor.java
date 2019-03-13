@@ -135,7 +135,7 @@ public class AddCreditor extends javax.swing.JFrame implements ActionListener {
                 System.out.println("Check mobile number entered");
             }
         } else if (e.getSource() == jButton1) {
-
+                setVisible(false);
         }
     }
 
