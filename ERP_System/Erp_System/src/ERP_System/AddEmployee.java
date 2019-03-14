@@ -5,17 +5,21 @@ import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 
 public class AddEmployee extends JFrame implements ActionListener {
 
-    String ename,cont, pass, designation;
+    String ename, cont, pass, designation;
     int cid, eno, a, sal;
     Verification obj;
     Connection con;
+    ResultSet rs;
+
     public AddEmployee(String ename, int cid) {
         this.ename = ename;
         this.cid = cid;
@@ -25,6 +29,18 @@ public class AddEmployee extends JFrame implements ActionListener {
         jButton1.addActionListener(this);
         jButton2.addActionListener(this);
         e_name.setText(ename);
+        try {
+            Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+            con = DriverManager.getConnection("jdbc:ucanaccess://src\\ERP_System\\Database\\ERPdb.accdb");
+            Statement stmt = con.createStatement();
+            String query = "Select Max( E_ID ) from Employee where C_ID = " + this.cid;
+            rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                e_no.setText("" + (rs.getInt(1) + 1));
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -143,8 +159,7 @@ public class AddEmployee extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == jButton1)
-        {
+        if (e.getSource() == jButton1) {
             eno = Integer.parseInt(e_no.getText());
             ename = e_name.getText();
             pass = password.getText();
@@ -153,8 +168,7 @@ public class AddEmployee extends JFrame implements ActionListener {
             a = Integer.parseInt(age.getText());
             sal = Integer.parseInt(salary.getText());
             obj = new Verification();
-            if(obj.verifyNumber(cont) == true)
-            {
+            if (obj.verifyNumber(cont) == true) {
                 try {
                     Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
                     con = DriverManager.getConnection("jdbc:ucanaccess://src\\ERP_System\\Database\\ERPdb.accdb");
@@ -168,16 +182,16 @@ public class AddEmployee extends JFrame implements ActionListener {
                     pst.setString(6, designation);
                     pst.setInt(7, sal);
                     pst.setString(8, cont);
-                    if(!pst.execute()){
+                    if (!pst.execute()) {
                         System.out.println("Success");
-                    } else
+                    } else {
                         System.out.println("Error in executing query");
+                    }
                 } catch (ClassNotFoundException | SQLException ex) {
                     Logger.getLogger(AddEmployee.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-        }else if(e.getSource() == jButton2)
-        {
+        } else if (e.getSource() == jButton2) {
             setVisible(false);
         }
     }
