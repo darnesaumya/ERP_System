@@ -1,8 +1,5 @@
 package ERP_System;
 
-import java.awt.Color;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
@@ -11,139 +8,206 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
 
-public class NewCompany extends JFrame implements ActionListener {
-
+public class NewCompany extends javax.swing.JFrame implements ActionListener {
+    
+    Verification obj;
+    String CName, owner, gst, address, email, contact;
     int cid;
-    JLabel l1, l2, l3, l4, l5, l6;
-    JTextField C_Name, Owner, Address, GST, Email, Contact;
-    JButton submit;
-    String CName, owner, address, gst, email, contact;
     Connection con;
     Statement stmt;
     ResultSet rs;
-    Verification obj;
 
     public NewCompany() {
-        GridBagLayout gbl = new GridBagLayout();
-        GridBagConstraints gbc = new GridBagConstraints();
-        setSize(400, 650);
+        initComponents();
         setVisible(true);
-        setLayout(gbl);
         setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-        setBackground(Color.WHITE);
-        l1 = new JLabel("Company Name");
-        l2 = new JLabel("Owner Name");
-        l3 = new JLabel("Company Address");
-        l4 = new JLabel("GST number");
-        l5 = new JLabel("Email address");
-        l6 = new JLabel("Contact Number");
-        C_Name = new JTextField(10);
-        Owner = new JTextField(10);
-        Address = new JTextField(10);
-        GST = new JTextField(10);
-        Email = new JTextField(10);
-        Contact = new JTextField(10);
-        submit = new JButton("Register");
-        submit.addActionListener(this);
-
-        gbc.weighty = 0.001;
-
-        //First Column
-        gbc.anchor = GridBagConstraints.LINE_START;
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        add(l1, gbc);
-        gbc.gridy = 1;
-        add(l2, gbc);
-        gbc.gridy = 2;
-        add(l3, gbc);
-        gbc.gridy = 3;
-        add(l4, gbc);
-        gbc.gridy = 4;
-        add(l5, gbc);
-        gbc.gridy = 5;
-        add(l6, gbc);
-
-        //Second Column
-        gbc.anchor = GridBagConstraints.CENTER;
-        gbc.gridx = 1;
-        gbc.gridy = 0;
-        add(C_Name, gbc);
-        gbc.gridy = 1;
-        add(Owner, gbc);
-        gbc.gridy = 2;
-        add(Address, gbc);
-        gbc.gridy = 3;
-        add(GST, gbc);
-        gbc.gridy = 4;
-        add(Email, gbc);
-        gbc.gridy = 5;
-        add(Contact, gbc);
-
-        //Button
-        gbc.anchor = GridBagConstraints.CENTER;
-        gbc.gridx = 0;
-        gbc.gridy = 6;
-        add(submit, gbc);
+        jButton1.addActionListener(this);
+        jButton2.addActionListener(this);
     }
+    
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        C_Name = new javax.swing.JTextField();
+        Owner = new javax.swing.JTextField();
+        GST = new javax.swing.JTextField();
+        Address = new javax.swing.JTextField();
+        Email = new javax.swing.JTextField();
+        Contact = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel1.setText("Company Name");
+
+        jLabel2.setText("GST Number");
+
+        jLabel3.setText("Owner Name");
+
+        jLabel4.setText("Address");
+
+        jLabel5.setText("Email");
+
+        jLabel6.setText("Contact");
+
+        jButton1.setText("Submit");
+
+        jButton2.setText("Cancel");
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(75, 75, 75)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(C_Name, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(GST, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(Address, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(Email, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(Owner, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton2))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton1)
+                            .addComponent(Contact, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(75, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(75, 75, 75)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(C_Name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Owner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(GST, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Address, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Contact, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
+                .addContainerGap(75, Short.MAX_VALUE))
+        );
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        CName = C_Name.getText();
-        owner = Owner.getText();
-        gst = GST.getText();
-        address = Address.getText();
-        email = Email.getText();
-        contact = Contact.getText();
-        obj = new Verification();
-        if (obj.verifyGST(gst) && obj.verifyEmail(email) && obj.verifyNumber(contact)) {
-            String query = "Select max (C_ID) from Company";
-            try {
-                Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
-                con = DriverManager.getConnection("jdbc:ucanaccess://src\\ERP_System\\Database\\ERPdb.accdb");
-                stmt = con.createStatement();
-                rs = stmt.executeQuery(query);
-                while (rs.next()) {
-                    cid = rs.getInt(1);
+        if (e.getSource() == jButton1) {
+            CName = C_Name.getText();
+            owner = Owner.getText();
+            gst = GST.getText();
+            address = Address.getText();
+            email = Email.getText();
+            contact = Contact.getText();
+            obj = new Verification();
+            if (obj.verifyGST(gst) && obj.verifyEmail(email) && obj.verifyNumber(contact)) {
+                String query = "Select max (C_ID) from Company";
+                try {
+                    Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
+                    con = DriverManager.getConnection("jdbc:ucanaccess://src\\ERP_System\\Database\\ERPdb.accdb");
+                    stmt = con.createStatement();
+                    rs = stmt.executeQuery(query);
+                    while (rs.next()) {
+                        cid = rs.getInt(1);
+                    }
+                    cid++;
+                    System.out.println(cid);
+                    query = "Insert into Company (C_ID, CName, Owner, HQ_Address, GST_No, Email, Contact_No)  values (?,?,?,?,?,?,?)";
+                    PreparedStatement pst = con.prepareStatement(query);
+                    pst.setInt(1, cid);
+                    pst.setString(2, CName);
+                    pst.setString(3, owner);
+                    pst.setString(4, address);
+                    pst.setString(5, gst);
+                    pst.setString(6, email);
+                    System.out.println("Hello");
+                    pst.setString(7, contact);
+                    if (pst.execute()) {
+                        System.out.println("Error in executing query");
+                    } else {
+                        MainFrame mainFrame = new MainFrame(owner, cid);
+                        AddEmployee addEmployee = new AddEmployee(owner, cid);
+                        setVisible(false);
+                    }
+                } catch (ClassNotFoundException | SQLException ex) {
+                    System.out.println(ex);
                 }
-                cid++;
-                System.out.println(cid);
-                query = "Insert into Company (C_ID, CName, Owner, HQ_Address, GST_No, Email, Contact_No)  values (?,?,?,?,?,?,?)";
-                PreparedStatement pst = con.prepareStatement(query);
-                pst.setInt(1, cid);
-                pst.setString(2, CName);
-                pst.setString(3, owner);
-                pst.setString(4, address);
-                pst.setString(5, gst);
-                pst.setString(6, email);
-                System.out.println("Hello");
-                pst.setString(7, contact);
-                if(pst.execute())
-                {
-                    System.out.println("Error in executing query");
-                }
-                else
-                {
-                    MainFrame mainFrame = new MainFrame(owner, cid);
-                    AddEmployee addEmployee = new AddEmployee(owner,cid);
-                    setVisible(false);
-                }
-            } catch (ClassNotFoundException | SQLException ex) {
-                System.out.println(ex);
-            }
-        } else {
-            if (obj.verifyEmail(email) == false) {
-                System.out.println("Check the email address entered");
-            } else if (obj.verifyGST(gst) == false) {
-                System.out.println("Check the GST number entered");
             } else {
-                System.out.println("Check the phone number entered");
+                if (obj.verifyEmail(email) == false) {
+                    System.out.println("Check the email address entered");
+                } else if (obj.verifyGST(gst) == false) {
+                    System.out.println("Check the GST number entered");
+                } else {
+                    System.out.println("Check the phone number entered");
+                }
             }
+        } else if (e.getSource() == jButton2) {
+            setVisible(false);
         }
     }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField Address;
+    private javax.swing.JTextField C_Name;
+    private javax.swing.JTextField Contact;
+    private javax.swing.JTextField Email;
+    private javax.swing.JTextField GST;
+    private javax.swing.JTextField Owner;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    // End of variables declaration//GEN-END:variables
 }
