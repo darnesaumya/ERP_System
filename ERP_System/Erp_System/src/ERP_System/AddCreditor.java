@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import javax.swing.JFrame;
 
 public class AddCreditor extends javax.swing.JFrame implements ActionListener {
 
@@ -19,6 +20,7 @@ public class AddCreditor extends javax.swing.JFrame implements ActionListener {
         setVisible(true);
         jButton1.addActionListener(this);
         jButton2.addActionListener(this);
+        setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
     }
 
     @SuppressWarnings("unchecked")

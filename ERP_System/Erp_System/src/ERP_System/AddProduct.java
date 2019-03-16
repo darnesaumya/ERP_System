@@ -5,7 +5,9 @@ import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import javax.swing.JFrame;
 
 public class AddProduct extends javax.swing.JFrame implements ActionListener {
@@ -22,7 +24,7 @@ public class AddProduct extends javax.swing.JFrame implements ActionListener {
         jButton1.addActionListener(this);
         jButton2.addActionListener(this);
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -130,21 +132,42 @@ public class AddProduct extends javax.swing.JFrame implements ActionListener {
             quant = Integer.parseInt(quantity.getText());
             pr = Integer.parseInt(price.getText());
             tx = Integer.parseInt(tax.getText());
-            String query = "Insert into Product (P_ID,C_ID,P_Name,Price,Tax,Quantity) values ( ? , ? , ? , ? , ? , ?)";
             try {
                 Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
                 con = DriverManager.getConnection("jdbc:ucanaccess://src\\ERP_System\\Database\\ERPdb.accdb");
-                PreparedStatement stmt = con.prepareStatement(query);
-                stmt.setInt(1, id);
-                stmt.setInt(2, cid);
-                stmt.setString(3, name);
-                stmt.setInt(4, pr);
-                stmt.setInt(5, tx);
-                stmt.setInt(6, quant);
-                if(!stmt.execute())
-                    System.out.println("Success");
-                else
-                    System.out.println("Error in executing query");
+                String sql = "Select P_ID, P_Name, Quantity from Product where P_ID = " + id + " and P_Name = '" + name + "'";
+                Statement st = con.createStatement();
+                ResultSet rs = st.executeQuery(sql);
+                if (rs.next()) {
+                    quant = quant + rs.getInt(3);
+                    sql = "Update Product set Quantity = ? , Price = ?, Tax = ? where P_ID = ? and P_Name = ? and C_ID = " + cid;
+                    PreparedStatement pt = con.prepareStatement(sql);
+                    pt.setInt(1, quant);
+                    pt.setInt(2, pr);
+                    pt.setInt(3, tx);
+                    pt.setInt(4, id);
+                    pt.setString(5, name);
+                    if (!pt.execute()) {
+                        System.out.println("Success");
+                    } else {
+                        System.out.println("failure");
+                    }
+                } else {
+                    String query = "Insert into Product (P_ID,C_ID,P_Name,Price,Tax,Quantity) values ( ? , ? , ? , ? , ? , ?)";
+                    PreparedStatement stmt = con.prepareStatement(query);
+                    stmt.setInt(1, id);
+                    stmt.setInt(2, cid);
+                    stmt.setString(3, name);
+                    stmt.setInt(4, pr);
+                    stmt.setInt(5, tx);
+                    stmt.setInt(6, quant);
+                    if (!stmt.execute()) {
+                        System.out.println("Success");
+                    } else {
+                        System.out.println("Error in executing query");
+                    }
+                }
+
             } catch (ClassNotFoundException | SQLException ex) {
                 System.out.println(ex);
             }
