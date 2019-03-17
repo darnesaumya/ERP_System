@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 public class NewCompany extends javax.swing.JFrame implements ActionListener {
     
@@ -171,22 +172,22 @@ public class NewCompany extends javax.swing.JFrame implements ActionListener {
                     System.out.println("Hello");
                     pst.setString(7, contact);
                     if (pst.execute()) {
-                        System.out.println("Error in executing query");
+                        JOptionPane.showMessageDialog(null, "Error in executing query");
                     } else {
                         MainFrame mainFrame = new MainFrame(owner, cid);
                         AddEmployee addEmployee = new AddEmployee(owner, cid);
                         setVisible(false);
                     }
                 } catch (ClassNotFoundException | SQLException ex) {
-                    System.out.println(ex);
+                    JOptionPane.showMessageDialog(null, ex);
                 }
             } else {
                 if (obj.verifyEmail(email) == false) {
-                    System.out.println("Check the email address entered");
+                    JOptionPane.showMessageDialog(null, "Check the email address entered");
                 } else if (obj.verifyGST(gst) == false) {
-                    System.out.println("Check the GST number entered");
+                    JOptionPane.showMessageDialog(null, "Check the GST number entered");
                 } else {
-                    System.out.println("Check the phone number entered");
+                    JOptionPane.showMessageDialog(null, "Check the phone number entered");
                 }
             }
         } else if (e.getSource() == jButton2) {

@@ -6,25 +6,31 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 public class SalesOrder extends javax.swing.JFrame {
-    String prod;
-    int q1,quant, tax, disc, cid;
+
+    String prod, dname;
+    int q1, quant, tax, disc, cid, did;
     double price, total;
     Connection con;
     Statement stmt;
     PreparedStatement pst;
     ResultSet rs;
-    
-    public SalesOrder(int cid){
+
+    public SalesOrder(int cid) {
         this.cid = cid;
         initComponents();
-        try{
+        try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://localhost/ERPdb"+"?user=root"+"&password=saumya");
-        }catch(ClassNotFoundException | SQLException e){
+            con = DriverManager.getConnection("jdbc:mysql://localhost/ERPdb" + "?user=root" + "&password=saumya");
+        } catch (ClassNotFoundException | SQLException e) {
             System.out.println(e);
         }
+        setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
     }
 
     @SuppressWarnings("unchecked")
@@ -188,26 +194,52 @@ public class SalesOrder extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        quant = Integer.parseInt(jTextField5.getText());
-        disc = Integer.parseInt(jTextField7.getText());
-        tax = Integer.parseInt(jTextField6.getText());
-        
+        dname = jTextField4.getText();
+        String sql = "Select D_ID from debtor where D_Name = '" + dname + "' and C_ID = " + cid;
+        try {
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(sql);
+            if (rs.next()) {
+                did = rs.getInt(1);
+                quant = Integer.parseInt(jTextField5.getText());
+                disc = Integer.parseInt(jTextField7.getText());
+                tax = Integer.parseInt(jTextField6.getText());
+                price = Integer.parseInt(jTextField8.getText());
+                String query = "Insert Into Sales_order (C_ID, D_ID, P_Name, Quantity, Discount) values (?,?,?,?,?)";
+                pst = con.prepareStatement(query);
+                pst.setInt(1, cid);
+                pst.setInt(2, did);
+                pst.setString(3,prod);
+                pst.setInt(4, quant);
+                pst.setInt(5, disc);
+                if(!pst.execute(query))
+                {
+                    JOptionPane.showMessageDialog(null, "Record inserted");
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null, "Error");
+                }
+            }else{
+                JOptionPane.showMessageDialog(null, "Invalid debtor name");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(SalesOrder.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         prod = jTextField2.getText();
-        String query = "Select Price, Tax, Quantity from Product where P_Name = '" + prod +"' and C_ID = " + cid;
+        String query = "Select Price, Tax, Quantity from Product where P_Name = '" + prod + "' and C_ID = " + cid;
         try {
             stmt = con.createStatement();
             rs = stmt.executeQuery(query);
-            if(rs.next())
-            {
-                jTextField6.setText(""+rs.getInt(2));
-                jTextField8.setText(""+rs.getInt(1));
+            if (rs.next()) {
+                jTextField6.setText("" + rs.getInt(2));
+                jTextField8.setText("" + rs.getInt(1));
                 q1 = rs.getInt(3);
-            }else 
-            {
-                System.out.println("Check Product Name");
+            } else {
+                JOptionPane.showMessageDialog(null, "Check Product Name");
             }
         } catch (SQLException ex) {
             System.out.println(ex);

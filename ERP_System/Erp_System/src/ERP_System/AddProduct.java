@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 public class AddProduct extends javax.swing.JFrame implements ActionListener {
 
@@ -148,9 +149,9 @@ public class AddProduct extends javax.swing.JFrame implements ActionListener {
                     pt.setInt(4, id);
                     pt.setString(5, name);
                     if (!pt.execute()) {
-                        System.out.println("Success");
+                        JOptionPane.showMessageDialog(null, "Success");
                     } else {
-                        System.out.println("failure");
+                        JOptionPane.showMessageDialog(null, "failure");
                     }
                 } else {
                     String query = "Insert into Product (P_ID,C_ID,P_Name,Price,Tax,Quantity) values ( ? , ? , ? , ? , ? , ?)";
@@ -162,14 +163,14 @@ public class AddProduct extends javax.swing.JFrame implements ActionListener {
                     stmt.setInt(5, tx);
                     stmt.setInt(6, quant);
                     if (!stmt.execute()) {
-                        System.out.println("Success");
+                        JOptionPane.showMessageDialog(null, "Success");
                     } else {
-                        System.out.println("Error in executing query");
+                        JOptionPane.showMessageDialog(null, "Error in executing query");
                     }
                 }
 
             } catch (ClassNotFoundException | SQLException ex) {
-                System.out.println(ex);
+                JOptionPane.showMessageDialog(null, ex);
             }
         } else if (e.getSource() == jButton2) {
             setVisible(false);

@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import javax.swing.JOptionPane;
 
 public class LoginFrame extends javax.swing.JFrame implements ActionListener{
     ResultSet rs;
@@ -152,13 +153,11 @@ public class LoginFrame extends javax.swing.JFrame implements ActionListener{
                         mf = new MainFrame(n, id);
                         setVisible(false);
                     } else {
-                        System.out.println("Login failed");
+                        JOptionPane.showMessageDialog(null, "Login failed");
                     }
                 }
-            } catch (SQLException ec) {
-                System.out.println(ec.getMessage());
-            } catch (ClassNotFoundException ex) {
-                System.out.println(ex.getMessage());
+            } catch (SQLException | ClassNotFoundException ec) {
+                JOptionPane.showMessageDialog(null, ec);
             }
         }else if(e.getSource() == jButton2)
         {

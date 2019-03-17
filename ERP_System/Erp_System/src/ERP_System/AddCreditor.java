@@ -8,6 +8,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 public class AddCreditor extends javax.swing.JFrame implements ActionListener {
 
@@ -114,14 +115,16 @@ public class AddCreditor extends javax.swing.JFrame implements ActionListener {
                     stmt.setInt(2, cid);
                     stmt.setString(3, cr_name);
                     stmt.setString(4, cont);
-                    if (stmt.execute()) {
-                        System.out.println("Error in executing query");
+                    if (!stmt.execute()) {
+                        JOptionPane.showMessageDialog(null, "Record inserted successfully");
+                    }else{
+                        JOptionPane.showMessageDialog(null, "Error");
                     }
                 } catch (ClassNotFoundException | SQLException ex) {
                     System.out.println(ex);
                 }
             } else {
-                System.out.println("Check mobile number entered");
+                JOptionPane.showMessageDialog(null, "Check Mobile Number");
             }
         } else if (e.getSource() == jButton1) {
                 setVisible(false);

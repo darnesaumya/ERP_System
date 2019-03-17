@@ -12,6 +12,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -133,13 +134,15 @@ public class AddDebtor extends javax.swing.JFrame implements ActionListener {
                     stmt.setString(3, db_name);
                     stmt.setString(4, cont);
                     if (stmt.execute()) {
-                        System.out.println("Error in executing query");
+                        JOptionPane.showMessageDialog(null, "Error");
+                    }else{
+                        JOptionPane.showMessageDialog(null, "Record Inserted Successfully");
                     }
                 } catch (ClassNotFoundException | SQLException ex) {
                     System.out.println(ex);
                 }
             } else {
-                System.out.println("Check the number entered");
+                JOptionPane.showMessageDialog(null, "Check the number entered");
             }
         } else if (e.getSource() == jButton2) {
             setVisible(false);

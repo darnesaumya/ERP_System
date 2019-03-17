@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 public class PlaceOrder extends javax.swing.JFrame implements ActionListener {
 
@@ -120,18 +121,18 @@ public class PlaceOrder extends javax.swing.JFrame implements ActionListener {
                     pst.setString(3, iName);
                     pst.setInt(4, quantity);
                     if (pst.execute()) {
-                        System.out.println("Error in executing query");
+                        JOptionPane.showMessageDialog(null, "Error in executing query");
                     } else {
-                        System.out.println("Success");
+                        JOptionPane.showMessageDialog(null, "Success");
                     }
                 } else {
-                    System.out.println("Check Product Name");
+                    JOptionPane.showMessageDialog(null, "Check Product Name");
                 }
             } else {
-                System.out.println("Invalid Creditor Name");
+                JOptionPane.showMessageDialog(null, "Invalid Creditor Name");
             }
         } catch (ClassNotFoundException | SQLException ex) {
-            System.out.println(ex);
+            JOptionPane.showMessageDialog(null, ex);
         }
     }
 

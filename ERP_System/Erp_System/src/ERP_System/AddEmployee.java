@@ -11,6 +11,7 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 public class AddEmployee extends JFrame implements ActionListener {
 
@@ -183,13 +184,16 @@ public class AddEmployee extends JFrame implements ActionListener {
                     pst.setInt(7, sal);
                     pst.setString(8, cont);
                     if (!pst.execute()) {
-                        System.out.println("Success");
+                        JOptionPane.showMessageDialog(null, "Success");
                     } else {
-                        System.out.println("Error in executing query");
+                        JOptionPane.showMessageDialog(null, "Error in executing query");
                     }
                 } catch (ClassNotFoundException | SQLException ex) {
                     Logger.getLogger(AddEmployee.class.getName()).log(Level.SEVERE, null, ex);
                 }
+            }else
+            {
+                JOptionPane.showMessageDialog(null, "Check the number entered");
             }
         } else if (e.getSource() == jButton2) {
             setVisible(false);
