@@ -151,8 +151,8 @@ public class NewCompany extends javax.swing.JFrame implements ActionListener {
             if (obj.verifyGST(gst) && obj.verifyEmail(email) && obj.verifyNumber(contact)) {
                 String query = "Select max (C_ID) from Company";
                 try {
-                    Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
-                    con = DriverManager.getConnection("jdbc:ucanaccess://src\\ERP_System\\Database\\ERPdb.accdb");
+                    Class.forName("com.mysql.cj.jdbc.Driver");
+                    con = DriverManager.getConnection("jdbc:mysql://localhost/ERPdb","root","saumya");
                     stmt = con.createStatement();
                     rs = stmt.executeQuery(query);
                     while (rs.next()) {

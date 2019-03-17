@@ -133,8 +133,8 @@ public class AddProduct extends javax.swing.JFrame implements ActionListener {
             pr = Integer.parseInt(price.getText());
             tx = Integer.parseInt(tax.getText());
             try {
-                Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
-                con = DriverManager.getConnection("jdbc:ucanaccess://src\\ERP_System\\Database\\ERPdb.accdb");
+                Class.forName("com.mysql.cj.jdbc.Driver");
+                con = DriverManager.getConnection("jdbc:mysql://localhost/ERPdb","root","saumya");
                 String sql = "Select P_ID, P_Name, Quantity from Product where P_ID = " + id + " and P_Name = '" + name + "'";
                 Statement st = con.createStatement();
                 ResultSet rs = st.executeQuery(sql);

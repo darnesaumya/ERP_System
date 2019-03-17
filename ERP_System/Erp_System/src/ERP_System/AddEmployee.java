@@ -30,15 +30,15 @@ public class AddEmployee extends JFrame implements ActionListener {
         jButton2.addActionListener(this);
         e_name.setText(ename);
         try {
-            Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
-            con = DriverManager.getConnection("jdbc:ucanaccess://src\\ERP_System\\Database\\ERPdb.accdb");
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            con = DriverManager.getConnection("jdbc:mysql://localhost/ERPdb","root","saumya");
             Statement stmt = con.createStatement();
             String query = "Select Max( E_ID ) from Employee where C_ID = " + this.cid;
             rs = stmt.executeQuery(query);
             while (rs.next()) {
                 e_no.setText("" + (rs.getInt(1) + 1));
             }
-        } catch (Exception e) {
+        } catch (ClassNotFoundException | SQLException e) {
             System.out.println(e);
         }
     }
@@ -170,8 +170,8 @@ public class AddEmployee extends JFrame implements ActionListener {
             obj = new Verification();
             if (obj.verifyNumber(cont) == true) {
                 try {
-                    Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
-                    con = DriverManager.getConnection("jdbc:ucanaccess://src\\ERP_System\\Database\\ERPdb.accdb");
+                    Class.forName("com.mysql.cj.jdbc.Driver");
+                    con = DriverManager.getConnection("jdbc:mysql://localhost/ERPdb","root","saumya");
                     String sql = "Insert into Employee (E_ID, C_ID, EName, Password, Age, Designation, Salary, Contact_no) values (?, ?, ?, ?, ?, ?, ?, ?)";
                     PreparedStatement pst = con.prepareStatement(sql);
                     pst.setInt(1, eno);

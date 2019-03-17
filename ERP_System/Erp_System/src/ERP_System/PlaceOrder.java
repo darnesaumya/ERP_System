@@ -104,8 +104,8 @@ public class PlaceOrder extends javax.swing.JFrame implements ActionListener {
         quantity = Integer.parseInt(tf3.getText());
         String query = "Select Cr_ID from Creditor where Cr_name = '" + crName + "'";
         try {
-            Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
-            con = DriverManager.getConnection("jdbc:ucanaccess://src\\ERP_System\\Database\\ERPdb.accdb");
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            con = DriverManager.getConnection("jdbc:mysql://localhost/ERPdb","root","saumya");
             stmt = con.createStatement();
             rs = stmt.executeQuery(query);
             if (rs.next()) {
@@ -113,7 +113,7 @@ public class PlaceOrder extends javax.swing.JFrame implements ActionListener {
                 rs = stmt.executeQuery(query);
                 if (rs.next()) {
                     cr_id = rs.getInt("Cr_ID");
-                    query = "Insert into Order(C_ID, Cr_ID, Item, Quantity) values(?,?,?,?)";
+                    query = "Insert into Debt_Order(C_ID, Cr_ID, Item, Quantity) values(?,?,?,?)";
                     pst = con.prepareStatement(query);
                     pst.setInt(1, cid);
                     pst.setInt(2, cr_id);

@@ -125,8 +125,8 @@ public class AddDebtor extends javax.swing.JFrame implements ActionListener {
             if (obj.verifyNumber(cont)) {
                 String query = "Insert into Debtor (D_ID,C_ID,D_Name,Contact) values ( ? , ? , ? , ?)";
                 try {
-                    Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
-                    Connection con = DriverManager.getConnection("jdbc:ucanaccess://src\\ERP_System\\Database\\ERPdb.accdb");
+                    Class.forName("com.mysql.cj.jdbc.Driver");
+                    Connection con = DriverManager.getConnection("jdbc:mysql://localhost/ERPdb","root","saumya");
                     PreparedStatement stmt = con.prepareStatement(query);
                     stmt.setInt(1, db_id);
                     stmt.setInt(2, cid);

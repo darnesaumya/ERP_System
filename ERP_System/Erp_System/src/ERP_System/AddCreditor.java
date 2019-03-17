@@ -1,5 +1,6 @@
 package ERP_System;
 
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
@@ -106,8 +107,8 @@ public class AddCreditor extends javax.swing.JFrame implements ActionListener {
             if (obj.verifyNumber(cont)) {
                 String query = "Insert into Creditor (Cr_ID,C_ID,Cr_Name,Contact) values ( ? , ? , ? , ?)";
                 try {
-                    Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
-                    Connection con = DriverManager.getConnection("jdbc:ucanaccess://src\\ERP_System\\Database\\ERPdb.accdb");
+                    Class.forName("com.mysql.cj.jdbc.Driver");
+                    Connection con = DriverManager.getConnection("jdbc:mysql://localhost/ERPdb","root","saumya");
                     PreparedStatement stmt = con.prepareStatement(query);
                     stmt.setInt(1, cr_id);
                     stmt.setInt(2, cid);
