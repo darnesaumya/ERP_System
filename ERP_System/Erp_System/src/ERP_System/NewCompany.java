@@ -150,7 +150,7 @@ public class NewCompany extends javax.swing.JFrame implements ActionListener {
             contact = Contact.getText();
             obj = new Verification();
             if (obj.verifyGST(gst) && obj.verifyEmail(email) && obj.verifyNumber(contact)) {
-                String query = "Select max (C_ID) from Company";
+                String query = "Select MAX(C_ID) from Company";
                 try {
                     Class.forName("com.mysql.cj.jdbc.Driver");
                     con = DriverManager.getConnection("jdbc:mysql://localhost/ERPdb","root","saumya");

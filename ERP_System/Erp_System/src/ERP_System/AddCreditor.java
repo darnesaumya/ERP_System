@@ -100,13 +100,12 @@ public class AddCreditor extends javax.swing.JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == jButton2) {
-            System.out.println("Hello");
             cr_id = Integer.parseInt(crid.getText());
             cr_name = crname.getText();
             cont = contact.getText();
             obj = new Verification();
             if (obj.verifyNumber(cont)) {
-                String query = "Insert into Creditor (Cr_ID,C_ID,Cr_Name,Contact) values ( ? , ? , ? , ?)";
+                String query = "Insert into Creditor (Cr_ID,C_ID,C_Name,Contact) values ( ? , ? , ? , ?)";
                 try {
                     Class.forName("com.mysql.cj.jdbc.Driver");
                     Connection con = DriverManager.getConnection("jdbc:mysql://localhost/ERPdb","root","saumya");
@@ -121,7 +120,7 @@ public class AddCreditor extends javax.swing.JFrame implements ActionListener {
                         JOptionPane.showMessageDialog(null, "Error");
                     }
                 } catch (ClassNotFoundException | SQLException ex) {
-                    System.out.println(ex);
+                    JOptionPane.showMessageDialog(null, ex);
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "Check Mobile Number");
